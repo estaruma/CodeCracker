@@ -16,7 +16,7 @@ public class CipherValidator {
     // checlk if character is valid
 
     private boolean isValidCharacter(char ch) {
-        if (Character.isLetterOrDigit(ch)) {
+        if (Character.isLetterOrDigit(ch) || ch == ' ') {
             return true;
         }
 

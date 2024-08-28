@@ -6,33 +6,37 @@ public class CodeCracker {
     // use decryption key
     private final char[] decryptionKey;
 
-    public CodeCracker(char[] decrytionKey) {
-        this.decryptionKey = decrytionKey;
+    public CodeCracker(char[] decryptionKey) {
+        this.decryptionKey = decryptionKey;
     }
 
     // to encode message
-    public String encodeMessage (String message) {
+    public String encodeMessage(String message) {
         StringBuilder encodedMessage = new StringBuilder();
 
         for (char letter : message.toCharArray()) {
-            //get position of letter
-            int position = Character.toLowerCase(letter) - 'a';
+            if (Character.isLetter(letter)) {
+                //get position of letter
+                int position = Character.toLowerCase(letter) - 'a';
 
-            // find encoded character using decrytion key
-            char encodedChar = decryptionKey[position];
+                // find encoded character using decrytion key
+                char encodedChar = decryptionKey[position];
 
 
-            // check if original letter was uppercase
+                // check if original letter was uppercase
 
-            if (Character.isUpperCase(letter)) {
-                encodedMessage.append(Character.toUpperCase(encodedChar));
+                if (Character.isUpperCase(letter)) {
+                    encodedMessage.append(Character.toUpperCase(encodedChar));
+                } else {
+                    encodedMessage.append(encodedChar);
+                }
             } else {
-                encodedMessage.append(encodedChar);
+                encodedMessage.append(letter);
             }
         }
         return encodedMessage.toString();
-
     }
+
 
 
     // to decode message
@@ -42,8 +46,9 @@ public class CodeCracker {
 
         for (char letter : message.toCharArray()) {
             if (isDecryptionCharacter(Character.toLowerCase(letter))) {
-                // find position
+                // find position in the decryption key
                 int position = findDecryptionPosition(Character.toLowerCase(letter));
+
                 // convert the position back to a letter
                 char decodedChar = (char) ('a' + position);
 
@@ -60,7 +65,7 @@ public class CodeCracker {
         return decodedMessage.toString();
     }
 
-    // check if char is in description key
+    // check if char is in decryption key
     private boolean isDecryptionCharacter(char character) {
         for (char keyChar : decryptionKey) {
             if (keyChar == character) {
@@ -71,15 +76,14 @@ public class CodeCracker {
     }
 
 
-    // method to find posiitons of a character
+    // method to find positions of a character
     private int findDecryptionPosition(char letter) {
         for (int i = 0; i < decryptionKey.length; i++) {
             if (decryptionKey[i] == letter) {
                 return i;
             }
         }
-        throw new IllegalArgumentException(String.valueOf(letter));
-
+        throw new IllegalArgumentException("Character not found in decryption key: " + letter);
     }
 }
 
