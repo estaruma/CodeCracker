@@ -7,14 +7,17 @@ public class Decryptor {
         this.mapping = mapping;
     }
 
-    // method to decrypt
-
     public String decrypt(String message) {
         StringBuilder decryptedMessage = new StringBuilder();
 
-        for (int i = 0; i < message.length(); i++) {
-            String symbol = String.valueOf(message.charAt(i));
-            decryptedMessage.append(mapping.getDecryptedCharacter(symbol));
+        for (char ch : message.toCharArray()) {
+            String symbol = String.valueOf(ch);
+            char decryptedChar = mapping.getDecryptedCharacter(symbol);
+            if (decryptedChar != '\0') {
+                decryptedMessage.append(decryptedChar);
+            } else {
+                decryptedMessage.append(symbol);
+            }
         }
 
         return decryptedMessage.toString();
