@@ -12,7 +12,6 @@ public class AlphabetHelper {
     // symbol to alphabet character
     private Map<String, Character> decryptionMap;
 
-
     // constructor
     public AlphabetHelper(String alphabet, String[] decryptionKey) {
         encryptionMap = new HashMap<>();
@@ -21,10 +20,11 @@ public class AlphabetHelper {
         // for loop populate maps
 
         for (int i = 0; i < alphabet.length(); i++) {
-            // map character to symbol
-            encryptionMap.put(alphabet.charAt(i), decryptionKey[i]);
-            // map symbol to character
-            decryptionMap.put(decryptionKey[i], alphabet.charAt(i));
+            char letter = alphabet.charAt(i);
+            String symbol = decryptionKey[i];
+
+            encryptionMap.put(letter, symbol);
+            decryptionMap.put(symbol, letter);
         }
     }
 
