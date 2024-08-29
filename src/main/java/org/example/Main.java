@@ -1,26 +1,24 @@
 package org.example;
 
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
-        char[] decryptionKey = {'!', ')', '"', '(', '£', '*', '%', '&', '>', '<', '@', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o'};
 
-        CodeCracker codeCracker = new CodeCracker(decryptionKey);
-        CipherValidator cipherValidator = new CipherValidator();
-
-        String message = "Hello World!";
-        if (cipherValidator.isValidMessage(message)) {
-
-            String encoded = codeCracker.encodeMessage(message);
-            System.out.println(encoded);
-
-            String decoded = codeCracker.decodeMessage(encoded);
-            System.out.println(decoded);
-        } else {
-            System.out.println("Invalid message");
-        }
+        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        String[] decryptionKey = {"!", ")", "\"", "(", "£", "*", "%", "&", ">", "<", "@", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o"};
 
 
+        AlphabetHelper mapping = new AlphabetHelper (alphabet, decryptionKey);
+
+        Encryptor encryptor = new Encryptor(mapping);
+        Decryptor decryptor = new Decryptor(mapping);
+
+        String message = "Hello World";
+        String encryptedMessage = encryptor.encrypt(message);
+        String decryptedMessage = decryptor.decrypt(encryptedMessage);
+
+
+        System.out.println("Original: " + message);
+        System.out.println("Encrypted: " + encryptedMessage);
+        System.out.println("Decrypted: " + decryptedMessage);
     }
 }
