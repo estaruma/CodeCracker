@@ -41,6 +41,21 @@ public class EcryptionTest {
     }
 
     @Test
+    public void testDecryptor() {
+        String alphabet = "abcdefghijklmnopqrstuvwxyz !";
+        String[] decryptionKey = {"!", ")", "\"", "(", "*", "£", "%", "&", ">", "<", "@", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "~", "?"};
+        AlphabetHelper mapping = new AlphabetHelper(alphabet, decryptionKey);
+        Decryptor decryptor = new Decryptor(mapping);
+
+        // Test encryption
+        assertEquals("d", decryptor.decrypt("("));
+        assertEquals("bafe", decryptor.decrypt(")!£*"));
+        assertEquals("b a", decryptor.decrypt(")~!"));
+        assertEquals("ajkl", decryptor.decrypt("!<@a"));
+        assertEquals("!b ", decryptor.decrypt("?)~"));
+    }
+
+    @Test
     public void testEncryptionDecryption() {
         String alphabet = "abcdefghijklmnopqrstuvwxyz !";
         String[] decryptionKey = {"!", ")", "\"", "(", "£", "*", "%", "&", ">", "<", "@", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "~", "!"};
