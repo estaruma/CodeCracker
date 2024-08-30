@@ -16,7 +16,6 @@ public class AlphabetHelper {
     public AlphabetHelper(String alphabet, String[] decryptionKey) {
         encryptionMap = new HashMap<>();
         decryptionMap = new HashMap<>();
-
         // for loop populate maps
 
         for (int i = 0; i < alphabet.length(); i++) {

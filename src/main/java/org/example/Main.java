@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
 
         String alphabet = "abcdefghijklmnopqrstuvwxyz !";
-        String[] decryptionKey = {"!", ")", "\"", "(", "£", "*", "%", "&", ">", "<", "@", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", " ", "!"};
+        String[] decryptionKey = {"!", ")", "\"", "(", "£", "*", "%", "&", ">", "<", "@", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "~", "!"};
 
         AlphabetHelper mapping = new AlphabetHelper(alphabet, decryptionKey);
 
