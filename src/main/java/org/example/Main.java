@@ -1,26 +1,23 @@
 package org.example;
 
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
-        char[] decryptionKey = {'!', ')', '"', '(', '£', '*', '%', '&', '>', '<', '@', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o'};
 
-        CodeCracker codeCracker = new CodeCracker(decryptionKey);
-        CipherValidator cipherValidator = new CipherValidator();
+        String alphabet = "abcdefghijklmnopqrstuvwxyz !";
+        String[] decryptionKey = {"!", ")", "\"", "(", "£", "*", "%", "&", ">", "<", "@", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "~", "!"};
 
-        String message = "Hello World!";
-        if (cipherValidator.isValidMessage(message)) {
+        AlphabetHelper mapping = new AlphabetHelper(alphabet, decryptionKey);
 
-            String encoded = codeCracker.encodeMessage(message);
-            System.out.println(encoded);
+        Encryptor encryptor = new Encryptor(mapping);
+        Decryptor decryptor = new Decryptor(mapping);
 
-            String decoded = codeCracker.decodeMessage(encoded);
-            System.out.println(decoded);
-        } else {
-            System.out.println("Invalid message");
-        }
+        // Convert the message to lowercase
+        String message = "Hello World!".toLowerCase();
+        String encryptedMessage = encryptor.encrypt(message);
+        String decryptedMessage = decryptor.decrypt(encryptedMessage);
 
-
+        System.out.println("Original: " + message);
+        System.out.println("Encrypted: " + encryptedMessage);
+        System.out.println("Decrypted: " + decryptedMessage);
     }
 }
