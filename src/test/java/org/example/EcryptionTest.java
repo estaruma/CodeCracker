@@ -47,7 +47,7 @@ public class EcryptionTest {
         AlphabetHelper mapping = new AlphabetHelper(alphabet, decryptionKey);
         Decryptor decryptor = new Decryptor(mapping);
 
-        // Test encryption
+        // Test decryption
         assertEquals("d", decryptor.decrypt("("));
         assertEquals("bafe", decryptor.decrypt(")!£*"));
         assertEquals("b a", decryptor.decrypt(")~!"));
